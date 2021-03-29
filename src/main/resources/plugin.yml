@@ -1,0 +1,16 @@
+name: Survival
+version: 1.0
+main: me.lehtinenkaali.Survival
+api-version: 1.13
+author: Lehtinenkaali
+description: Survival plugin to CoreHQ
+depend:
+  - Vault
+  - PlaceholderAPI
+commands:
+  tilastot:
+  pankki:
+  uhkapelaus:
+
+
+
