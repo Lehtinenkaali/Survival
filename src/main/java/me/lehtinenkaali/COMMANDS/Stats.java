@@ -24,11 +24,11 @@ public class Stats implements CommandExecutor, TabCompleter {
                 p.sendMessage("§eTee /tilastot {kuolemat/tapot}");
                 return true;
             }
-                if (command.getName().equalsIgnoreCase("Kuolemat")) {
+                if (args.length == 1 && command.getName().equalsIgnoreCase("Kuolemat")) {
                     p.sendMessage("§eSinulla on " + p.getStatistic(Statistic.DEATHS) + " Kuolemaa");
                 }
 
-                if (command.getName().equalsIgnoreCase("Tapot")) {
+                if (args.length == 1 && command.getName().equalsIgnoreCase("Tapot")) {
                     p.sendMessage("§e Sinulla on " + p.getStatistic(Statistic.PLAYER_KILLS) + "Tappoa");
                 }
 

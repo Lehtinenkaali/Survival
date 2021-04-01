@@ -20,21 +20,23 @@ public class Scoreboard implements BoardProvider {
 
     @Override
     public String getTitle(Player player) {
-        return ChatColor.translateAlternateColorCodes('§', "§6CoreHQ §7¦ &7Survival ");
+        return ChatColor.translateAlternateColorCodes('§', "§dHohto §5¦ &5Survival ");
     }
+
 
     @Override
     public List<String> getLines(Player player) {
+        int health = (int) player.getHealth();
         List<String> lines = new ArrayList<>();
-        lines.add("&7&m                          ");
-        lines.add("&eSinä: &6" + player.getName());
-        lines.add("&ePelaajia: &6" + Bukkit.getOnlinePlayers().size());
-        lines.add("&eRaha: &6" + eco.format(eco.getBalance(player)));
-        lines.add("&eTapot: &6" + player.getStatistic(Statistic.PLAYER_KILLS));
-        lines.add("&eKuolemat: &6" + player.getStatistic(Statistic.DEATHS));
-        lines.add("&eSydämet: &6" + player.getHealth() /2);
-        lines.add("&7&m                          ");
-        lines.add("&dhohto.eu");
+        lines.add("&5&m                          ");
+        lines.add("&dSinä: &5" + player.getName());
+        lines.add("&dPelaajia: &5" + Bukkit.getOnlinePlayers().size());
+        lines.add("&dRaha: &5" + eco.format(eco.getBalance(player)));
+        lines.add("&dTapot: &5" + player.getStatistic(Statistic.PLAYER_KILLS));
+        lines.add("&dKuolemat: &5" + player.getStatistic(Statistic.DEATHS));
+        lines.add("&dSydämet: &5" + health /2);
+        lines.add("&5&m                          ");
+        lines.add("&dHohto.ml");
         return lines;
     }
 }

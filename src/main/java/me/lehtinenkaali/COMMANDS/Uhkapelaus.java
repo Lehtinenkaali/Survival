@@ -11,11 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class Uhkapelaus implements CommandExecutor {
 
-    public Uhkapelaus(UhkapelausGUI uhkapelausgui) {
-        this.uhkapelausgui = uhkapelausgui;
-    }
 
-    public UhkapelausGUI uhkapelausgui;
 
 
 
@@ -30,8 +26,11 @@ public class Uhkapelaus implements CommandExecutor {
         fee.setAmount(10);
         if (player.getInventory().getItemInMainHand().isSimilar(fee)) {
             player.getInventory().removeItem(fee);
-            uhkapelausgui.spin(player);
+            player.sendMessage("§1Sinulta poistettiin 10 emeraldia onnistuneesti!");
+            UhkapelausGUI.uhkapelausgui.spin(player);
             return true;
+        } else {
+            player.sendMessage("§1Tarvitset 10 emeraldia suorittaaksesi komennon.");
         }
         return false;
     }

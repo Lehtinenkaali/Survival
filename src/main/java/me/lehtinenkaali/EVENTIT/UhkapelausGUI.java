@@ -1,11 +1,14 @@
 package me.lehtinenkaali.EVENTIT;
 
+
 import me.lehtinenkaali.Survival;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -16,17 +19,13 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class UhkapelausGUI{
+public class UhkapelausGUI implements Listener{
     List<Inventory> invs = new ArrayList<Inventory>();
 
     public static ItemStack[] contents;
     private int ItemIndex = 0;
 
-    public UhkapelausGUI(Survival survival) {
-        this.survival = survival;
-    }
-
-    public Survival survival;
+    public static UhkapelausGUI uhkapelausgui;
 
 
     public void shuffle(Inventory inv) {
@@ -49,7 +48,7 @@ public class UhkapelausGUI{
 
         int startingIndex = ThreadLocalRandom.current().nextInt(contents.length);
         for (int i = 0; i < startingIndex; i++) {
-            for (int itemstacks = 9; itemstacks > 18; itemstacks++) {
+            for (int itemstacks = 9; itemstacks < 18; itemstacks++) {
                 inv.setItem(itemstacks, contents[(itemstacks + ItemIndex) % contents.length]);
             }
             ItemIndex++;
@@ -62,7 +61,7 @@ public class UhkapelausGUI{
         inv.setItem(4, item);
     }
     public void spin(final Player player) {
-
+        uhkapelausgui = this;
         Inventory inv = Bukkit.createInventory(null, 27, ChatColor.DARK_AQUA + "§lOnnea peliin");
         shuffle(inv);
         invs.add(inv);
@@ -84,7 +83,7 @@ public class UhkapelausGUI{
                 if (ticks > delay * 10) {
                     ticks = 0;
 
-                    for (int itemstacks = 9; itemstacks > 18; itemstacks++)
+                    for (int itemstacks = 9; itemstacks < 18; itemstacks++)
                         inv.setItem(itemstacks, contents[(itemstacks + ItemIndex) % contents.length]);
 
                     ItemIndex++;
@@ -106,6 +105,15 @@ public class UhkapelausGUI{
                     }
                 }
             }
-        }.runTaskTimer(survival, 1, 1);
+        }.runTaskTimer(Survival.plugin, 1, 1);
+    }
+
+    @EventHandler
+    public void onClick(InventoryClickEvent e) {
+        if (!invs.contains(e.getInventory())) {
+                return;
+        }
+       e.setCancelled(true);
+        return;
     }
 }

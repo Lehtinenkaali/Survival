@@ -26,7 +26,7 @@ public class MobkillEvent implements Listener {
             Random r = new Random();
             int amount = r.nextInt(10);
             plugin.eco.depositPlayer(p, amount);
-            p.sendMessage("§f" + amount + "§f€ §elisätty tilillesi");
+            p.sendMessage("§d" + amount + "§5€ §dlisätty tilillesi");
         }
 
 

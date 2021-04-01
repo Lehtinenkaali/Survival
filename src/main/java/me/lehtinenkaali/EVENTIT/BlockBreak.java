@@ -66,6 +66,16 @@ public class BlockBreak implements Listener {
             case SPAWNER:
                 eco.depositPlayer(p, 100);
                 break;
+            case COAL_ORE:
+                eco.depositPlayer(p, 1);
+                break;
+            case REDSTONE_ORE:
+                eco.depositPlayer(p, 2);
+                break;
+            case LAPIS_ORE:
+                eco.depositPlayer(p, 2);
+                break;
+
 
         }
 

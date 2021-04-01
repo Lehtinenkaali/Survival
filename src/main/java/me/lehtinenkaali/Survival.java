@@ -28,17 +28,14 @@ public class Survival extends JavaPlugin {
     public Permission perms = null;
     public boolean placeholders = false;
 
+    public static Survival plugin;
 
-    public Survival(UhkapelausGUI uhkapelausgui) {
-        this.uhkapelausgui = uhkapelausgui;
-    }
-
-    public UhkapelausGUI uhkapelausgui;
 
 
     @Override
 
     public void onEnable() {
+        plugin = this;
 
         getLogger().info("§dHohto survival käynnistyy");
         if (!setupEconomy()) {
@@ -50,10 +47,12 @@ public class Survival extends JavaPlugin {
 
         cropMessage.clear();
 
+
+
         //Komennot
         getCommand("tilastot").setExecutor(new Stats());
         getCommand("pankki").setExecutor(new Bal());
-        getCommand("Uhkapelaa").setExecutor(new Uhkapelaus(uhkapelausgui));
+        getCommand("Uhkapelaa").setExecutor(new Uhkapelaus());
 
 
 
@@ -63,6 +62,7 @@ public class Survival extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerLeave(), this);
         getServer().getPluginManager().registerEvents(new SeedProt(cropMessage), this);
         getServer().getPluginManager().registerEvents(new BlockBreak(), this);
+        getServer().getPluginManager().registerEvents(new UhkapelausGUI(), this);
     }
 
     public void onDisable() {
